@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="col-8">
+        <h3>User's profile update form</h3>
+        <div class="alert alert-danger" role="alert" *ngIf="updateErr">
+            {{updateErr}}
+        </div>
+        <hr>
+        <form>
+            <div class="form-group">
+                <label for="">Account : </label>  {{account.username}}
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Password<span style="color: red;">*</span> :</label>
+              <input 
+                  type="password" 
+                  class="form-control" 
+                  placeholder="Password" 
+                  value="" 
+                  required
+                  [(ngModel)]="password"
+                  name="password"
+                  />
+            </div>
+            <div class="form-group">
+              <label for="">Confirm password<span style="color: red;">*</span> :</label> 
+              <input 
+                  type="password" 
+                  class="form-control" 
+                  placeholder="Confirm Password" 
+                  value="" 
+                  required
+                  [(ngModel)]="cfpassword"
+                  name="cfpassword"
+                  />
+            </div>
+            <div class="form-group">
+              <label for="">Name:<span style="color: red;">*</span> :</label>
+              <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Name" 
+              value="" 
+              required
+              [(ngModel)]="name"
+              name="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">Email<span style="color: red;">*</span> :</label>
+              <input 
+                  type="text" 
+                  class="form-control" 
+                  placeholder="Email" 
+                  value="" 
+                  required
+                  [(ngModel)]="email"
+                  name="email"
+                  />
+            </div>
+            <div class="form-group">
+                <label for="">Phone<span style="color: red;">*</span> :</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Phone" 
+                    value="" 
+                    required
+                    [(ngModel)]="phone"
+                    name="phone"
+                    />
+              </div>
+            <button 
+              type="button" 
+              class="btn btn-outline-primary"
+              (click)="onUpdate()"
+              >Update Profile</button>
+            <button 
+              type="reset" 
+              class="btn btn-outline-danger mx-3"
+            >Reset</button>
+            <button 
+              type="button" 
+              class="btn btn-outline-warning"
+              routerLink="/user"
+            >Back to User's Main Page</button>
+            <br><hr>
+          </form>
+    </div>
+</div>
