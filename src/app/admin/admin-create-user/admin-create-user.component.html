@@ -1,0 +1,60 @@
+<a class="btn btn-primary" role="button">
+  <fa-icon class="text-white" [icon]="goBackIcon"></fa-icon>
+  Go back to admin panel
+</a>
+<br>
+<div class="container mt-5">
+  <div class="alert alert-primary" role="alert">
+    <h2 class="text-center">Create new user</h2>
+  </div>
+  <div class="form-content">
+    <div class="row">
+      <div class="col-md-12">
+        <hr>
+        <form>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                      <label for="">Username<span style="color: red;">*</span> :</label>
+                      <input type="text" class="form-control" placeholder="Username" value="" required [(ngModel)]="username"
+                        name="username" />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label">Password<span style="color: red;">*</span> :</label>
+                      <input type="password" class="form-control" placeholder="Password" value="" required
+                        [(ngModel)]="password" name="password" />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Confirm password<span style="color: red;">*</span> :</label>
+                      <input type="password" class="form-control" placeholder="Confirm Password" value="" required
+                        [(ngModel)]="cfpassword" name="cfpassword" />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="">Name<span style="color: red;">*</span> :</label>
+                      <input type="text" class="form-control" placeholder="Your name" value="" required [(ngModel)]="name"
+                        name="name" />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Email<span style="color: red;">*</span> :</label>
+                      <input type="text" class="form-control" placeholder="Email" value="" required [(ngModel)]="email"
+                        name="email" />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Phone<span style="color: red;">*</span> :</label>
+                      <input type="text" class="form-control" placeholder="Phone number" value="" required [(ngModel)]="phone"
+                        name="phone" />
+                    </div>
+                  </div>
+            </div>
+            <div class="row justify-content-center mt-2">
+                <button type="button" class="btn btn-outline-primary mr-3" (click)="onRegister()">Create new user</button>
+                <button type="reset" class="btn btn-outline-danger">Reset</button><br>
+            </div>
+          <hr>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+span{
+    color: rgb(143, 138, 138);
+}
+span:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
+}
+h1{
+    color: rgb(180, 121, 44);
+}
+.admin-panel{
+    transform: scale(1.5,1.5);
+    margin-right: 30px;
+    margin-left: 15px;
+}

@@ -1,0 +1,50 @@
+
+<div class="alert alert-primary" role="alert"><h1 class="text-center">User's Information</h1>
+</div>
+<form>
+  <div class="container">
+    <div class="row mb-3">
+    <div class="col-5">
+      <h3>Username: </h3>
+    </div>
+    <div class="col-7">
+      <input type="text" class="form-control" 
+      [(ngModel)]="acc.username" name="username" [disabled]="isDisable">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-5">
+      <h3>Name: </h3>
+    </div>
+    <div class="col-7">
+      <input type="text" class="form-control" 
+      [(ngModel)]="acc.name" name="name" [disabled]="isDisable">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-5">
+      <h3>Email: </h3>
+    </div>
+    <div class="col-7">
+      <input type="text" class="form-control" 
+      [(ngModel)]="acc.email" name="email" [disabled]="isDisable">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-5">
+      <h3>Phone: </h3>
+    </div>
+    <div class="col-7">
+      <input type="text" class="form-control" 
+      [(ngModel)]="acc.phone" name="phone" [disabled]="isDisable">
+    </div>
+  </div>
+  <hr>
+  <div class="row justify-content-center" *ngIf="!isDisable">
+    <button type="button" class="btn btn-outline-primary mr-4" (click)="onSaveEdit()">Save change</button>
+    <button type="button" class="btn btn-outline-danger" (click)="onCloseEdit()">Close (Discard changes)</button>
+  </div>
+  </div>
+  
+</form>
+

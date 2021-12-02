@@ -1,0 +1,53 @@
+<ng-container *ngIf="account; else notLogin">
+  <div class="container-fluid row">
+    <div class="col-2 text-center mt-4">
+      <button class="btn admin-panel" disabled>
+        <fa-icon [icon]="adminIcon"></fa-icon> Admin Panel
+      </button>
+    </div>
+    <div class="col-5">
+      <h1>Welcome <span style="color: red;">{{account.name}}</span></h1>
+      <div class="offset-2 col-6">
+        <span (click)="onUpdateProfile()">Update Profile</span> -
+        <span (click)="onLogOut()">Logout</span>
+      </div>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-primary float-right mt-4" routerLink="/create-user">Create new user</button>
+    </div>
+  </div>
+
+
+
+  <hr style="margin: 30px auto;">
+
+  <div class="row">
+    <div class="col-8">
+      <app-admin-list-user (selectedUsername)="getSelectedUser($event)" (isDisable)="getIsDisable($event)">
+      </app-admin-list-user>
+    </div>
+    <div class="col-4">
+      <ng-container *ngIf="selectedUser; else noSelectedUser">
+        <app-admin-edit-user [acc]="selectedUser" [isDisable]="isDisable" (formClear)="getClear($event)">
+        </app-admin-edit-user>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<!-- If not login as admin role yet, display this page-->
+<ng-template #notLogin>
+  <div class="row justify-content-center">
+    <h1>You're not login yet!</h1>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <button type="button" class="btn btn-success" routerLink="/login">Click here to go to Login Page</button>
+  </div>
+</ng-template>
+
+<!-- If no user was selected, display this -->
+<ng-template #noSelectedUser>
+  <div class="alert alert-primary" role="alert">
+    <h2 class="text-center">Select an action!</h2>
+  </div>
+</ng-template>

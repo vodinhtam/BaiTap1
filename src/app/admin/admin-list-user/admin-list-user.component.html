@@ -1,0 +1,77 @@
+<ng-container *ngIf="users.length > 0; else noUser">
+  <div class="row alert alert-success">
+    <div class="col-12">
+      <h2 class="text-center">
+        List of current users
+      </h2>
+    </div>
+  </div>
+  <table class="table table-light">
+    <thead class="thead-light">
+      <tr class="text-center">
+        <th>#</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index" class="text-center">
+        <td>{{i + 1}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td>
+          <button type="button" class="btn btn-primary text-white" 
+            (click)="onViewUser(user)" 
+            data-toggle="tooltip" 
+            title="View User">
+            <fa-icon [icon]="viewIcon"></fa-icon>
+          </button>
+          <button type="button" class="btn btn-warning text-white mx-2" 
+            (click)="onEditUser(user)" 
+            data-toggle="tooltip" 
+            title="Edit User">
+            <fa-icon [icon]="editIcon"></fa-icon>
+          </button>
+          <button type="button" class="btn btn-danger text-white" 
+            (click)="onDeleteUser(user)" 
+            data-toggle="tooltip" 
+            title="Delete User">
+            <fa-icon [icon]="delIcon"></fa-icon>
+          </button>
+        </td>
+  
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <div class="row alert alert-success">
+    <div class="col-4">
+      <button type="button" class="btn btn-primary text-white">
+        <fa-icon [icon]="viewIcon"></fa-icon>
+      </button> => View User
+    </div>
+    <div class="col-4">
+      <button type="button" class="btn btn-warning text-white">
+        <fa-icon [icon]="editIcon"></fa-icon>
+      </button> => Edit User
+    </div>
+    <div class="col-4">
+      <button type="button" class="btn btn-danger text-white">
+        <fa-icon [icon]="delIcon"></fa-icon>
+      </button> => Delete User
+    </div>
+  </div>
+</ng-container>
+<ng-template #noUser>
+  <div class="alert alert-success" role="alert">
+    <h2 class="text-center">There's no user to display!</h2>
+  </div>
+  <hr>
+
+</ng-template>
+

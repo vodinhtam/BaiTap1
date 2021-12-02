@@ -1,0 +1,65 @@
+<a class="btn btn-primary" role="button" (click)="onGoBack()">
+  <fa-icon class="text-white" [icon]="goBackIcon"></fa-icon>
+  Go back to admin panel
+</a>
+<br>
+<div class="container mt-5">
+  <div class="alert alert-primary" role="alert">
+    <h2 class="text-center">
+      {{editable ? 'Admin Profile Information (Edit Mode)' : 'Admin Profile Information (View Mode)'}}
+    </h2>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="updateErr">
+    {{updateErr}}
+  </div>
+  <hr>
+  <form>
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="">Account : </label>
+              <input type="text" class="form-control" required [(ngModel)]="username" name="username" [disabled]="!editable"/>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Password<span style="color: red;">*</span> :</label>
+              <input type="password" class="form-control" required
+                [(ngModel)]="password" name="password" [disabled]="!editable"/>
+            </div>
+            <div class="form-group">
+              <label for="">Confirm password<span style="color: red;">*</span> :</label>
+              <input type="password" class="form-control" required
+                [(ngModel)]="cfpassword" name="cfpassword" [disabled]="!editable"/>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="">Name:<span style="color: red;">*</span> :</label>
+              <input type="text" class="form-control" required [(ngModel)]="name" name="name" [disabled]="!editable"/>
+            </div>
+            <div class="form-group">
+              <label for="">Email<span style="color: red;">*</span> :</label>
+              <input type="text" class="form-control" required [(ngModel)]="email" name="email" [disabled]="!editable"/>
+            </div>
+            <div class="form-group">
+              <label for="">Phone<span style="color: red;">*</span> :</label>
+              <input type="text" class="form-control" placeholder="Phone" value="" required [(ngModel)]="phone"
+                name="phone" [disabled]="!editable"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <ng-container *ngIf="editable; else viewMode">
+      <button type="button" class="btn btn-outline-primary" (click)="onUpdate()">Update Profile</button>
+    <button type="button" class="btn btn-outline-danger mx-3" (click)="onClose()">Close</button>
+    </ng-container>
+    <ng-template #viewMode>
+      <button type="button" class="btn btn-outline-primary" (click)="onTriggerEdit()">Click to edit</button>
+    </ng-template>
+    <br>
+    <hr>
+  </form>
+</div>
