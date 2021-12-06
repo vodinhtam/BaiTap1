@@ -49,7 +49,6 @@ export class AdminEditUserComponent implements OnInit, OnChanges, AfterViewInit 
 
   onSaveEdit() {
     if (this.editUserForm.invalid) {
-      alert("Please fill all fields with correct data!")
       this.editUserForm.markAllAsTouched()
     } else {
       let data = this.editUserForm.getRawValue();

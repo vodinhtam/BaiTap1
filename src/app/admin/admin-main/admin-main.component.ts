@@ -24,11 +24,11 @@ export class AdminMainComponent implements OnInit {
 
   //xem them ben service
   ngOnInit(): void {
-    this.account = this.accService.getAccount(localStorage.getItem('currentAccount'));
+    this.account = this.accService.getLoginUser();
   }
 
   onLogOut() {
-    localStorage.removeItem('currentAccount');
+    localStorage.removeItem('loginUser');
     this.router.navigate(['/index'])
   }
 

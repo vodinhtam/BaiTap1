@@ -14,11 +14,11 @@ export class UserMainComponent implements OnInit {
   constructor(private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
-    this.account = this.accountService.getAccount(localStorage.getItem('currentAccount'))
+    this.account = this.accountService.getLoginUser()
   }
 
   onLogOut(){
-    localStorage.removeItem('currentAccount')
+    localStorage.removeItem('loginUser')
     this.router.navigate(['/index'])
   }
 

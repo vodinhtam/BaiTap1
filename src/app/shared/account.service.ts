@@ -25,11 +25,8 @@ export class AccountService {
     return this.accounts;
   }
 
-  //so sanh filter method nay va method duoi, su khac nhau == va ===
-  //tim hieu them ve y nghia 'if(variable)' bang cach chay thu
-  //chuyen method filter => method find (find item in array ts)
   checkExists(username: string, password: string){
-    let acc = this.accounts.filter(x => x.username === username && x.password === password)[0]
+    let acc = this.accounts.find(x => x.username === username && x.password === password)
     if(acc){
       return true;
     } else{
@@ -38,18 +35,18 @@ export class AccountService {
   }
 
   //method getLoginUser(localstorage.getItem())
+  getLoginUser(){
+    return this.accounts.find(x => x.username === localStorage.getItem('loginUser'))
+  }
 
   getAccount(username: string){
-    let usernameFilter = this.accounts.filter(x => {
-      return x.username === username
-    })
-    return usernameFilter[0];
+    return this.accounts.find(x => x.username === username)
   }
 
   performLogin(username: string){
     let acc = this.getAccount(username)
     if(acc){
-      localStorage.setItem('currentAccount',username);
+      localStorage.setItem('loginUser',username);
       if(acc.isAdmin){
         this.router.navigate(['/admin']);
       } else {
@@ -59,10 +56,7 @@ export class AccountService {
   }
 
   getUserList(){
-    let users = this.accounts.filter(x => {
-      return x.isAdmin === false
-    })
-    return users;
+    return this.accounts.filter(x =>  x.isAdmin === false)
   }
 
   addUser(acc: Account){
@@ -77,13 +71,9 @@ export class AccountService {
     acc.gender = newAcc.gender;
     acc.dob = newAcc.dob;
     acc.ageGroup = newAcc.ageGroup;
-    
-    console.log("🚀 ~ file: account.service.ts ~ line 69 ~ AccountService ~ updateUser ~ acc", acc)
   }
 
   removeAccount(acc: Account){
-    this.accounts = this.accounts.filter(x => {
-      return x.username !== acc.username
-    })
+    this.accounts = this.accounts.filter(x => x.username !== acc.username)
   }
 }

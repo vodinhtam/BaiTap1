@@ -24,7 +24,7 @@ export class AdminDetailComponent implements OnInit {
   constructor(private accountService: AccountService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.acc = this.accountService.getAccount(localStorage.getItem('currentAccount'))
+    this.acc = this.accountService.getLoginUser()
     this.editForm = this.fb.group({
       username: [this.acc.username, Validators.required],
       fullname: [this.acc.fullname, Validators.required],
@@ -73,7 +73,6 @@ export class AdminDetailComponent implements OnInit {
 
   onUpdate() {
     if (this.editForm.invalid) {
-      alert("Please fill all fields with correct data!")
       this.editForm.markAllAsTouched()
     } else {
       let data = this.editForm.getRawValue();
