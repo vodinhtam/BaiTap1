@@ -38,7 +38,7 @@
             <h3>Phone: </h3>
           </div>
           <div class="col-8">
-            <input type="text" class="form-control" formControlName="phone" [attr.disabled]="isDisable ? true: null" #phone>
+            <input type="text" class="form-control" formControlName="phone" [attr.disabled]="isDisable ? true: null">
             <small *ngIf="editUserForm.get('phone').invalid && editUserForm.get('phone').touched"
               class="text-danger">This field is required</small>
           </div>
@@ -104,9 +104,9 @@
   <br>
   <div class="row justify-content-center">
     <div class="" *ngIf="!isDisable">
-      <button type="submit" class="btn btn-outline-primary mr-4">Save change</button>
+      <button type="submit" class="btn btn-outline-primary mr-4" >Save change</button>
       <button type="button" class="btn btn-outline-warning mr-4" (click)="onReset()">Reset</button>
-      <button type="button" class="btn btn-outline-danger" (click)="onCloseEdit()">Close (Discard changes)</button>
+      <button type="button" class="btn btn-outline-danger" (click)="onCloseEdit()">Close</button>
     </div>
   </div>
 

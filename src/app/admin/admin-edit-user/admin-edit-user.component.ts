@@ -22,9 +22,6 @@ export class AdminEditUserComponent implements OnInit, OnChanges, AfterViewInit 
   ageGroups = ['Adult(> 19 years old)', 'Teenager(13 - 19 years old)', 'Kid(< 13 years old)']
   dateIcon = faCalendarDay;
 
-  //target focus on last element
-  @ViewChild('phone') vc: ElementRef;
-
   constructor(private accountService: AccountService, private fb: FormBuilder) { }
 
 
@@ -41,10 +38,12 @@ export class AdminEditUserComponent implements OnInit, OnChanges, AfterViewInit 
       email: [this.acc.email, Validators.required],
       phone: [this.acc.phone, Validators.required],
     });
+
+    window.scrollTo(0,document.body.scrollHeight)
   }
 
   ngAfterViewInit() {
-    this.vc.nativeElement.focus();
+    window.scrollTo(0,document.body.scrollHeight)
   }
 
   onSaveEdit() {

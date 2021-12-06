@@ -41,7 +41,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let user of pageOfItems; let i = index " class="text-center">
-      <td></td>
+      <td>{{ (currentPage-1)*pageSize + i + 1 }}</td>
       <td>{{user.username}}</td>
       <td>{{user.fullname}}</td>
       <td>{{user.email}}</td>
@@ -71,11 +71,21 @@
   </tbody>
 </table>
 <div class="row justify-content-between pt-2">
+  <!-- <div class="mt-2">
+    Records/page:
+    <select [(ngModel)]="pageSize">
+      <option value="3">3</option>
+      <option value="6">6</option>
+      <option value="9">9</option>
+      <option value={{users.length}}>max</option>
+    </select>
+  </div> -->
   <div class="mt-2">
-    Total <strong class="text-danger">{{users.length}}</strong> records, 
-    <strong class="text-danger">{{users.length/pageSize | number:'1.0-0'}}</strong> page(s)
+    Showing page <strong class="text-danger">{{currentPage}}</strong>/
+    <strong class="text-danger">{{users.length/pageSize | roundUp}}</strong> 
+    (Total records: <strong class="text-danger">{{users.length}}</strong>)
   </div>
-  <div class="my-pagination">
+  <div class="my-pagination" (click)="onPaging($event)">
     <jw-pagination [items]="users" (changePage)="onChangePage($event)" [pageSize]="pageSize"></jw-pagination>
 </div>
 </div>

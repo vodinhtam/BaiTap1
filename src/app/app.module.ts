@@ -19,6 +19,7 @@ import { AdminListUserComponent } from './admin/admin-list-user/admin-list-user.
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdminCreateUserComponent } from './admin/admin-create-user/admin-create-user.component';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { RoundUpPipe } from './pipes/round-up.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
     AdminListUserComponent,
     AdminCreateUserComponent,
     FilterPipePipe,
+    RoundUpPipe,
     
   ],
   imports: [

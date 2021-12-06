@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { faClone, faEye, faFilter, faUserEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { Account } from '../../shared/account.model';
@@ -9,12 +9,13 @@ import { AccountService } from '../../shared/account.service';
   templateUrl: './admin-list-user.component.html',
   styleUrls: ['./admin-list-user.component.css']
 })
-export class AdminListUserComponent implements OnInit {
+export class AdminListUserComponent implements OnInit{
   users: Account[];
   pageOfItems: Array<any>;
   selectFilter: string = '--Select Filter--';
   keyFilter: string;
   pageSize: number = 3;
+  currentPage: number = 1;
 
   editIcon = faUserEdit;
   viewIcon = faEye;
@@ -34,7 +35,6 @@ export class AdminListUserComponent implements OnInit {
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
-    console.log(this.pageOfItems)
   }
 
   onEditUser(acc: Account) {
@@ -53,12 +53,14 @@ export class AdminListUserComponent implements OnInit {
       //update list
       this.users = this.accService.getUserList();
     }
+    this.currentPage = 1
   }
 
   onClickFilter() {
-    if (this.keyFilter === undefined || this.keyFilter === '') {
+    if (!this.keyFilter) {
       this.users = this.accService.getUserList()
     } else {
+      this.currentPage = 1;
       this.users = this.accService.getUserList()
       if (this.selectFilter === 'username') {
         this.users = this.users.filter(x => x.username.indexOf(this.keyFilter) != -1)
@@ -69,16 +71,21 @@ export class AdminListUserComponent implements OnInit {
     }
   }
 
-  onClearFilter(){
+  onClearFilter() {
     this.selectFilter = '--Select Filter--';
     this.keyFilter = '';
     this.users = this.accService.getUserList()
+    this.currentPage = 1;
   }
 
   onKD(e: any) {
     if (e.keyCode === 13) {
       this.onClickFilter();
     }
+  }
+
+  onPaging(e: any) {
+    this.currentPage = +e.srcElement.innerText;
   }
 
 }
