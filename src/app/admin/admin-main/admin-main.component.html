@@ -1,4 +1,4 @@
-<ng-container *ngIf="account; else notLogin">
+<ng-container *ngIf="account.isAdmin; else notLogin">
   <div class="container-fluid row">
     <div class="col-2 text-center mt-4">
       <button class="btn admin-panel" disabled>
@@ -6,7 +6,7 @@
       </button>
     </div>
     <div class="col-5">
-      <h1>Welcome <span style="color: red;">{{account.name}}</span></h1>
+      <h1>Welcome <span style="color: red;">{{account.fullname}}</span></h1>
       <div class="offset-2 col-6">
         <span (click)="onUpdateProfile()">Update Profile</span> -
         <span (click)="onLogOut()">Logout</span>
@@ -20,25 +20,31 @@
 
 
   <hr style="margin: 30px auto;">
-
-  <div class="row">
-    <div class="col-8">
-      <app-admin-list-user (selectedUsername)="getSelectedUser($event)" (isDisable)="getIsDisable($event)">
-      </app-admin-list-user>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <app-admin-list-user (selectedUsername)="getSelectedUser($event)" (isDisable)="getIsDisable($event)">
+        </app-admin-list-user>
+      </div>
     </div>
-    <div class="col-4">
-      <ng-container *ngIf="selectedUser; else noSelectedUser">
-        <app-admin-edit-user [acc]="selectedUser" [isDisable]="isDisable" (formClear)="getClear($event)">
-        </app-admin-edit-user>
-      </ng-container>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <ng-container *ngIf="selectedUser; ">
+          <app-admin-edit-user [acc]="selectedUser" [isDisable]="isDisable" (clearSelectedUser)="getClear($event)">
+          </app-admin-edit-user>
+        </ng-container>
+      </div>
     </div>
   </div>
+
 </ng-container>
 
 <!-- If not login as admin role yet, display this page-->
 <ng-template #notLogin>
   <div class="row justify-content-center">
-    <h1>You're not login yet!</h1>
+    <h1>Sorry!This is for admin role only!</h1>
+    <button type="button" routerLink="/index">Back to homepage</button>
   </div>
   <div class="row justify-content-center mt-3">
     <button type="button" class="btn btn-success" routerLink="/login">Click here to go to Login Page</button>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwPaginationModule } from 'jw-angular-pagination'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,7 @@ import { AdminEditUserComponent } from './admin/admin-edit-user/admin-edit-user.
 import { AdminListUserComponent } from './admin/admin-list-user/admin-list-user.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdminCreateUserComponent } from './admin/admin-create-user/admin-create-user.component';
-import { LoginModalComponent } from './login-modal/login-modal.component';
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -33,14 +34,17 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
     AdminEditUserComponent,
     AdminListUserComponent,
     AdminCreateUserComponent,
-    LoginModalComponent
+    FilterPipePipe,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    JwPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

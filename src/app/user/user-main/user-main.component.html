@@ -1,5 +1,5 @@
 <div *ngIf="account; else notLogin">
-    <h1>Welcome {{account.name}}</h1><span (click)="onLogOut()">Logout</span>
+    <h1>Welcome {{account.fullname}}</h1><span (click)="onLogOut()">Logout</span>
     <hr>
     <button type="button" class="btn btn-outline-primary" routerLink="/user-edit">Update Profile</button>
 </div>

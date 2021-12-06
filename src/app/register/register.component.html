@@ -1,92 +1,62 @@
 <h2 class="text-center text-success">User Registration</h2>
 <div class="form-content">
   <div class="row">
-    <div class="col-md-8 mx-auto">
+    <div class="col-md-8 offset-2">
       <hr>
-      <form>
-        <div class="form-group">
-          <label for="">Username<span style="color: red;">*</span> :</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Username" 
-              value="" 
-              required
-              [(ngModel)]="username"
-              name="username"
-              />
+      <form (ngSubmit)="onRegister()" [formGroup]="regForm">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="form-control-label">Username<span style="color: red;">*</span> :</label>
+              <input type="text" class="form-control" placeholder="Username"
+                formControlName="username" #username>
+                <small *ngIf="regForm.get('username').invalid && regForm.get('username').touched"
+                class="text-danger">This field is required</small>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Password<span style="color: red;">*</span> :</label>
+              <input type="password" class="form-control" placeholder="Password"
+                formControlName="password">
+                <small *ngIf="regForm.get('password').invalid && regForm.get('password').touched"
+                class="text-danger">This field is required</small>
+            </div>
+            <div class="form-group">
+              <label for="">Confirm password<span style="color: red;">*</span> :</label>
+              <input type="password" class="form-control" placeholder="Confirm Password" formControlName="cfpassword">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Full Name:<span style="color: red;">*</span> :</label>
+              <input type="text" class="form-control" placeholder="Your full name"
+                formControlName="fullname">
+                <small *ngIf="regForm.get('fullname').invalid && regForm.get('fullname').touched"
+                class="text-danger">This field is required</small>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Phone:<span style="color: red;">*</span> :</label>
+              <input type="text" class="form-control" placeholder="Phone"
+                formControlName="phone">
+                <small *ngIf="regForm.get('phone').invalid && regForm.get('phone').touched"
+                class="text-danger">This field is required</small>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Email:<span style="color: red;">*</span> :</label>
+              <input type="text" class="form-control" placeholder="Email"
+                formControlName="email">
+                <small *ngIf="regForm.get('email').invalid && regForm.get('email').touched"
+                class="text-danger">This field is required</small>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-control-label">Password<span style="color: red;">*</span> :</label>
-          <input 
-              type="password" 
-              class="form-control" 
-              placeholder="Password" 
-              value="" 
-              required
-              [(ngModel)]="password"
-              name="password"
-              />
+        <div class="row justify-content-center mt-2">
+          <button type="submit" class="btn btn-outline-primary mr-3">Create new user</button>
+          <button type="reset" class="btn btn-outline-danger">Reset</button><br>
         </div>
-        <div class="form-group">
-          <label for="">Confirm password<span style="color: red;">*</span> :</label> 
-          <input 
-              type="password" 
-              class="form-control" 
-              placeholder="Confirm Password" 
-              value="" 
-              required
-              [(ngModel)]="cfpassword"
-              name="cfpassword"
-              />
-        </div>
-        <div class="form-group">
-          <label for="">Name<span style="color: red;">*</span> :</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Your name" 
-              value="" 
-              required
-              [(ngModel)]="name"
-              name="name"
-              />
-        </div>
-        <div class="form-group">
-          <label for="">Email<span style="color: red;">*</span> :</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Email" 
-              value="" 
-              required
-              [(ngModel)]="email"
-              name="email"
-              />
-        </div>
-        <div class="form-group">
-          <label for="">Phone<span style="color: red;">*</span> :</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Phone number" 
-              value="" 
-              required
-              [(ngModel)]="phone"
-              name="phone"
-              />
-        </div>
-        <button 
-          type="button" 
-          class="btn btn-outline-primary mr-3"
-          (click)="onRegister()"
-          >Register</button>
-        <button 
-          type="reset" 
-          class="btn btn-outline-danger"
-        >Reset</button><br><hr>
+        <hr>
       </form>
       <a routerLink="/login" href="">Already have an account? Click here to Login!</a>  
+    </div>
+    <div class="col-4">
+      {{regForm.get('gender').value}}
     </div>
   </div>
 </div>

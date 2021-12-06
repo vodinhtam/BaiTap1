@@ -1,0 +1,9 @@
+#genderip{
+    font-size: larger;
+    padding-top: 8px;
+    display: flexbox;
+    justify-content: space-around;
+}
+form .ng-invalid.ng-touched{
+    border: solid 1px red;
+}

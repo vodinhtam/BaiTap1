@@ -1,4 +1,4 @@
-<a class="btn btn-primary" role="button">
+<a class="btn btn-primary" role="button" (click)="onGoBack()">
   <fa-icon class="text-white" [icon]="goBackIcon"></fa-icon>
   Go back to admin panel
 </a>
@@ -11,47 +11,54 @@
     <div class="row">
       <div class="col-md-12">
         <hr>
-        <form>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                      <label for="">Username<span style="color: red;">*</span> :</label>
-                      <input type="text" class="form-control" placeholder="Username" value="" required [(ngModel)]="username"
-                        name="username" />
-                    </div>
-                    <div class="form-group">
-                      <label class="form-control-label">Password<span style="color: red;">*</span> :</label>
-                      <input type="password" class="form-control" placeholder="Password" value="" required
-                        [(ngModel)]="password" name="password" />
-                    </div>
-                    <div class="form-group">
-                      <label for="">Confirm password<span style="color: red;">*</span> :</label>
-                      <input type="password" class="form-control" placeholder="Confirm Password" value="" required
-                        [(ngModel)]="cfpassword" name="cfpassword" />
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-group">
-                      <label for="">Name<span style="color: red;">*</span> :</label>
-                      <input type="text" class="form-control" placeholder="Your name" value="" required [(ngModel)]="name"
-                        name="name" />
-                    </div>
-                    <div class="form-group">
-                      <label for="">Email<span style="color: red;">*</span> :</label>
-                      <input type="text" class="form-control" placeholder="Email" value="" required [(ngModel)]="email"
-                        name="email" />
-                    </div>
-                    <div class="form-group">
-                      <label for="">Phone<span style="color: red;">*</span> :</label>
-                      <input type="text" class="form-control" placeholder="Phone number" value="" required [(ngModel)]="phone"
-                        name="phone" />
-                    </div>
-                  </div>
+        <form (ngSubmit)="onCreate()" [formGroup]="createForm">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label class="form-control-label">Username<span style="color: red;">*</span> :</label>
+                <input type="text" class="form-control" placeholder="Username"
+                  formControlName="username" #username>
+                  <small *ngIf="createForm.get('username').invalid && createForm.get('username').touched"
+                  class="text-danger">This field is required</small>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Password<span style="color: red;">*</span> :</label>
+                <input type="password" class="form-control" placeholder="Password"
+                  formControlName="password">
+                  <small *ngIf="createForm.get('password').invalid && createForm.get('password').touched"
+                  class="text-danger">This field is required</small>
+              </div>
+              <div class="form-group">
+                <label for="">Confirm password<span style="color: red;">*</span> :</label>
+                <input type="password" class="form-control" placeholder="Confirm Password" formControlName="cfpassword">
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Full Name:<span style="color: red;">*</span> :</label>
+                <input type="text" class="form-control" placeholder="Your full name"
+                  formControlName="fullname">
+                  <small *ngIf="createForm.get('fullname').invalid && createForm.get('fullname').touched"
+                  class="text-danger">This field is required</small>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Phone:<span style="color: red;">*</span> :</label>
+                <input type="text" class="form-control" placeholder="Phone"
+                  formControlName="phone">
+                  <small *ngIf="createForm.get('phone').invalid && createForm.get('phone').touched"
+                  class="text-danger">This field is required</small>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Email:<span style="color: red;">*</span> :</label>
+                <input type="text" class="form-control" placeholder="Email"
+                  formControlName="email">
+                  <small *ngIf="createForm.get('email').invalid && createForm.get('email').touched"
+                  class="text-danger">This field is required</small>
+              </div>
             </div>
-            <div class="row justify-content-center mt-2">
-                <button type="button" class="btn btn-outline-primary mr-3" (click)="onRegister()">Create new user</button>
-                <button type="reset" class="btn btn-outline-danger">Reset</button><br>
-            </div>
+          </div>
+          <div class="row justify-content-center mt-2">
+            <button type="submit" class="btn btn-outline-primary mr-3">Create new user</button>
+            <button type="reset" class="btn btn-outline-danger">Reset</button><br>
+          </div>
           <hr>
         </form>
       </div>

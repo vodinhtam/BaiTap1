@@ -1,50 +1,114 @@
-
-<div class="alert alert-primary" role="alert"><h1 class="text-center">User's Information</h1>
+<div class="alert alert-primary" role="alert">
+  <h1 class="text-center">User's Information</h1>
 </div>
-<form>
-  <div class="container">
-    <div class="row mb-3">
+<form (ngSubmit)="onSaveEdit()" [formGroup]="editUserForm"  >
+  <div class="row">
     <div class="col-5">
-      <h3>Username: </h3>
+      <div class="container">
+        <div class="row mb-3">
+          <div class="col-4">
+            <h3>Username: </h3>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="username" [attr.disabled]=true >
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <h3>Name: </h3>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="fullname" [attr.disabled]="isDisable ? true: null">
+            <small *ngIf="editUserForm.get('fullname').invalid && editUserForm.get('fullname').touched"
+              class="text-danger">This field is required</small>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <h3>Email: </h3>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="email" [attr.disabled]="isDisable ? true: null">
+            <small *ngIf="editUserForm.get('email').invalid && editUserForm.get('email').touched"
+              class="text-danger">This field is required</small>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <h3>Phone: </h3>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="phone" [attr.disabled]="isDisable ? true: null" #phone>
+            <small *ngIf="editUserForm.get('phone').invalid && editUserForm.get('phone').touched"
+              class="text-danger">This field is required</small>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-7">
-      <input type="text" class="form-control" 
-      [(ngModel)]="acc.username" name="username" [disabled]="isDisable">
+    <div class="offset-1 col-6">
+      <div class="container">
+        <div class="row mb-3">
+          <div class="col-4">
+            <h3>Gender: </h3>
+          </div>
+          <div class="col-8">
+            <div id="genderip">
+              <div class="form-check-inline" *ngFor="let gender of genders">
+                <label [for]="gender" class="ml-2">
+                  <input type="radio" [value]="gender" [id]="gender" formControlName="gender"
+                    [attr.disabled]="isDisable ? true: null"> {{gender | titlecase}}
+                </label>
+              </div>
+            </div>
+            <span class="col-8 offset-4"
+              *ngIf="editUserForm.get('gender').invalid && editUserForm.get('gender').touched"
+              class="text-danger">Select your gender!</span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <h3>DOB: </h3>
+          </div>
+          <div class="col-8">
+            <div class="input-group">
+              <input class="form-control" placeholder="Click this button to select =>" formControlName="dob"
+                ngbDatepicker #d="ngbDatepicker" [attr.disabled]="isDisable ? true: null">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary text-primary calendar" (click)="d.toggle()" type="button"
+                  [attr.disabled]="isDisable ? true: null">
+                  <fa-icon [icon]="dateIcon"></fa-icon>
+                  Select
+                </button>
+              </div>
+              <small *ngIf="editUserForm.get('dob').invalid && editUserForm.get('dob').touched" class="text-danger">Date
+                of birth is required, and birth's year should be smaller than current year</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <h3>Age Group: </h3>
+          </div>
+          <div class="col-8">
+            <select class="form-control" formControlName="ageGroup" [attr.disabled]="isDisable ? true: null">
+              <option *ngFor="let ageGroup of ageGroups" [value]="ageGroup">{{ageGroup}}</option>
+            </select>
+            <small *ngIf="editUserForm.get('ageGroup').invalid && editUserForm.get('ageGroup').touched"
+              class="text-danger">This field is required, and your date-of-birth have to match with selected age
+              group!</small>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row mb-3">
-    <div class="col-5">
-      <h3>Name: </h3>
-    </div>
-    <div class="col-7">
-      <input type="text" class="form-control" 
-      [(ngModel)]="acc.name" name="name" [disabled]="isDisable">
-    </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-5">
-      <h3>Email: </h3>
-    </div>
-    <div class="col-7">
-      <input type="text" class="form-control" 
-      [(ngModel)]="acc.email" name="email" [disabled]="isDisable">
+  <br>
+  <div class="row justify-content-center">
+    <div class="" *ngIf="!isDisable">
+      <button type="submit" class="btn btn-outline-primary mr-4">Save change</button>
+      <button type="button" class="btn btn-outline-warning mr-4" (click)="onReset()">Reset</button>
+      <button type="button" class="btn btn-outline-danger" (click)="onCloseEdit()">Close (Discard changes)</button>
     </div>
   </div>
-  <div class="row mb-3">
-    <div class="col-5">
-      <h3>Phone: </h3>
-    </div>
-    <div class="col-7">
-      <input type="text" class="form-control" 
-      [(ngModel)]="acc.phone" name="phone" [disabled]="isDisable">
-    </div>
-  </div>
-  <hr>
-  <div class="row justify-content-center" *ngIf="!isDisable">
-    <button type="button" class="btn btn-outline-primary mr-4" (click)="onSaveEdit()">Save change</button>
-    <button type="button" class="btn btn-outline-danger" (click)="onCloseEdit()">Close (Discard changes)</button>
-  </div>
-  </div>
-  
-</form>
 
+  <br><br>
+</form>

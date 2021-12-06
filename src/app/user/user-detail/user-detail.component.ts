@@ -22,7 +22,7 @@ export class UserDetailComponent implements OnInit {
   ngOnInit(): void {
     this.account = this.accountService.getAccount(localStorage.getItem('currentAccount'))
     this.email = this.account.email;
-    this.name = this.account.name;
+    this.name = this.account.fullname;
     this.phone = this.account.phone;
   }
 
@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit {
       this.updateErr = "The password confirmation is not match!"
     } else {
       this.account.password = this.password
-      this.account.name = this.name
+      this.account.fullname = this.name
       this.account.email = this.email
       this.account.phone = this.phone
       alert("Successfully updated user's profile! Redirecting to User's Main Page!") 

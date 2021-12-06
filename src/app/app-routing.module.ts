@@ -9,7 +9,6 @@ import { AdminMainComponent } from './admin/admin-main/admin-main.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { AdminDetailComponent } from './admin/admin-detail/admin-detail.component';
 import { AdminCreateUserComponent } from './admin/admin-create-user/admin-create-user.component';
-import { LoginModalComponent } from './login-modal/login-modal.component';
 
 const routes: Routes = [
   {
@@ -43,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginModalComponent
+    component: LoginComponent
   },
   {
     path: 'register',

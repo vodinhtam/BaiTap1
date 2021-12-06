@@ -22,6 +22,7 @@ export class AdminMainComponent implements OnInit {
 
   constructor(private accService: AccountService, private router: Router) { }
 
+  //xem them ben service
   ngOnInit(): void {
     this.account = this.accService.getAccount(localStorage.getItem('currentAccount'));
   }
@@ -36,22 +37,15 @@ export class AdminMainComponent implements OnInit {
   }
 
   getSelectedUser(acc: Account) {
-    // use the object in array? No
-    // this.selectedUser = acc;
-
-    //copy object instead
-    this.selectedUser = new Account(acc.username, acc.password, acc.isAdmin, acc.name, acc.email, acc.phone)
-
-    //save the username in localStorage
-    localStorage.setItem("selectedUser", acc.username)
+    this.selectedUser = acc;
   }
 
   getIsDisable(isDisable: boolean) {
     this.isDisable = isDisable;
   }
 
-  getClear(isFormClear: boolean){
-    if(isFormClear){
+  getClear(isClearSelectedUser: boolean){
+    if(isClearSelectedUser){
       this.selectedUser = undefined;
     }
   }

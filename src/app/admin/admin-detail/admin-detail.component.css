@@ -1,3 +1,7 @@
 label{
     font-weight: bold;
 }
+
+form .ng-invalid.ng-touched{
+    border: solid 1px red;
+}

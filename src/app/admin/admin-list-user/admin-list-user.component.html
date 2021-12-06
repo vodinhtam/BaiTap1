@@ -1,71 +1,85 @@
-<ng-container *ngIf="users.length > 0; else noUser">
-  <div class="row alert alert-success">
-    <div class="col-12">
-      <h2 class="text-center">
-        List of current users
-      </h2>
-    </div>
+<div class="row alert alert-success">
+  <div class="col-12">
+    <h2 class="text-center">
+      List of current users
+    </h2>
   </div>
-  <table class="table table-light">
-    <thead class="thead-light">
-      <tr class="text-center">
-        <th>#</th>
-        <th>Username</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users; let i = index" class="text-center">
-        <td>{{i + 1}}</td>
-        <td>{{user.username}}</td>
-        <td>{{user.name}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.phone}}</td>
-        <td>
-          <button type="button" class="btn btn-primary text-white" 
-            (click)="onViewUser(user)" 
-            data-toggle="tooltip" 
-            title="View User">
-            <fa-icon [icon]="viewIcon"></fa-icon>
-          </button>
-          <button type="button" class="btn btn-warning text-white mx-2" 
-            (click)="onEditUser(user)" 
-            data-toggle="tooltip" 
-            title="Edit User">
-            <fa-icon [icon]="editIcon"></fa-icon>
-          </button>
-          <button type="button" class="btn btn-danger text-white" 
-            (click)="onDeleteUser(user)" 
-            data-toggle="tooltip" 
-            title="Delete User">
-            <fa-icon [icon]="delIcon"></fa-icon>
-          </button>
-        </td>
-  
-      </tr>
-    </tbody>
-  </table>
-  <hr>
-  <div class="row alert alert-success">
-    <div class="col-4">
-      <button type="button" class="btn btn-primary text-white">
-        <fa-icon [icon]="viewIcon"></fa-icon>
-      </button> => View User
-    </div>
-    <div class="col-4">
-      <button type="button" class="btn btn-warning text-white">
-        <fa-icon [icon]="editIcon"></fa-icon>
-      </button> => Edit User
-    </div>
-    <div class="col-4">
-      <button type="button" class="btn btn-danger text-white">
-        <fa-icon [icon]="delIcon"></fa-icon>
-      </button> => Delete User
-    </div>
+</div>
+<div class="row alert">
+  <div class="col-3">
+    <select class="form-control" [(ngModel)]="selectFilter">
+      <option selected>--Select Filter--</option>
+      <option value="username">username</option>
+      <option value="email">email</option>
+    </select>
   </div>
+  <div class="col-5">
+    <input class="form-control" type="text" placeholder="Your keywords here..." [(ngModel)]="keyFilter" (keydown)="onKD($event)">
+  </div>
+  <div class="col-2">
+    <button type="button" class="btn btn-outline-primary w-100" (click)="onClickFilter()">
+      <fa-icon [icon]="filterIcon"></fa-icon>
+      Filter...</button>
+  </div>
+  <div class="col-2">
+    <button type="button" class="btn btn-outline-info w-100" (click)="onClearFilter()">
+      <fa-icon [icon]="cfilterIcon"></fa-icon>
+      Clear Filter</button>
+  </div>
+</div>
+<br>
+<table class="table table-light">
+  <thead class="thead-light">
+    <tr class="text-center">
+      <th>#</th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of pageOfItems; let i = index " class="text-center">
+      <td></td>
+      <td>{{user.username}}</td>
+      <td>{{user.fullname}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.phone}}</td>
+      <td>
+        <button type="button" class="btn btn-primary text-white" 
+          (click)="onViewUser(user)" 
+          data-toggle="tooltip" 
+          title="View User">
+          <fa-icon [icon]="viewIcon"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-warning text-white mx-2" 
+          (click)="onEditUser(user)" 
+          data-toggle="tooltip" 
+          title="Edit User">
+          <fa-icon [icon]="editIcon"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-danger text-white" 
+          (click)="onDeleteUser(user)" 
+          data-toggle="tooltip" 
+          title="Delete User">
+          <fa-icon [icon]="delIcon"></fa-icon>
+        </button>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+<div class="row justify-content-between pt-2">
+  <div class="mt-2">
+    Total <strong class="text-danger">{{users.length}}</strong> records, 
+    <strong class="text-danger">{{users.length/pageSize | number:'1.0-0'}}</strong> page(s)
+  </div>
+  <div class="my-pagination">
+    <jw-pagination [items]="users" (changePage)="onChangePage($event)" [pageSize]="pageSize"></jw-pagination>
+</div>
+</div>
+<!-- <ng-container *ngIf="users.length > 0; else noUser">
 </ng-container>
 <ng-template #noUser>
   <div class="alert alert-success" role="alert">
@@ -73,5 +87,5 @@
   </div>
   <hr>
 
-</ng-template>
+</ng-template> -->
 
